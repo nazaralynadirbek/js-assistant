@@ -11,7 +11,7 @@ exports.modify = (request) => {
                 'first_name',
                 'last_name',
                 'gender'
-            ],
+            ].join(','),
             access_token: process.env.ACCESS_TOKEN
         }
     }).then((response) => {
