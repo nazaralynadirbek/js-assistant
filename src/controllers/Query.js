@@ -1,4 +1,4 @@
-const Query = require('../../models/Query');
+const Query = require('../models/Query');
 
 // Create
 exports.create = (request) => {
