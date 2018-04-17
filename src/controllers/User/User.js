@@ -1,13 +1,20 @@
 const User = require('../../models/User/User');
 
-// Create
-exports.create = (data) => {
-    //
-}
+// Create or update
+exports.modify = (request) => {
+    User.findOneAndUpdate(request, {
+        expire: new Date()
+    }, {
+        upsert              : true,
+        new                 : true,
+        setDefaultsOnInsert : true
+    }, (error, response) => {
+        if (error) {
+            console.error('DATABASE: Create method failed');
 
-// Update
-exports.update = (data) => {
-    //
+            return;
+        }
+    })
 }
 
 // Delete
