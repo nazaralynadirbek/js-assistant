@@ -1,9 +1,10 @@
-const User = require('../controllers/User/User');
+const User = require('../controllers/User');
+const Query = require('../controllers/Query');
 
 module.exports = (app) => {
 
     // POST
-    app.post('/', (request, response) => {
+    app.post('/webhook', (request, response) => {
         let body = request.body;
 
         if (body.object === 'page') {
@@ -15,8 +16,11 @@ module.exports = (app) => {
                 // entry.messaging is array with only one object
                 let message = entry.messaging[0];
 
+                // Save into database
+                Query.create(message)
+
                 // Logging
-                console.info('POST: Message received: %s', JSON.parse(JSON.stringify(message)));
+                console.info('POST: Message received: %s', JSON.stringify(message));
             })
 
             // Responds with '200 OK'

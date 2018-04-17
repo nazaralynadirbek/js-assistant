@@ -1,4 +1,4 @@
-const User = require('../../models/User/User');
+const User = require('../../models/User');
 
 // Create or update
 exports.modify = (request) => {
@@ -10,10 +10,12 @@ exports.modify = (request) => {
         setDefaultsOnInsert : true
     }, (error, response) => {
         if (error) {
-            console.error('DATABASE: Create method failed');
+            console.error('USER: Modify method failed');
 
             return;
         }
+
+        console.info('USER: New record added');
     })
 }
 
