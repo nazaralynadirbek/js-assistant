@@ -16,16 +16,27 @@ module.exports = (app) => {
                 // entry.messaging is array with only one object
                 let message = entry.messaging[0];
 
-                // Save into database
-                Query.create(message)
+                // If payload
+                // Get user information and create new User
+                if (message.postback.payload === 'GET_STARTED_PAYLOAD') {
+                    User.modify(message);
+                }
 
-                // Logging
-                console.info('POST: Message received: %s', JSON.stringify(message));
+                // Save into database
+                if (message.message != undefined) {
+                    Query.create(message);
+                }
             })
+
+            // Logger
+            console.info('POST: 200 OK')
 
             // Responds with '200 OK'
             response.sendStatus(200)
         } else {
+
+            // Logger
+            console.warn('POST: 404 Not Found')
 
             // Responds with '404 Not Found'
             response.sendStatus(404)
