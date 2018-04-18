@@ -1,7 +1,5 @@
 const axios = require('axios');
-
-// Models
-const User = require('../models/User');
+const User  = require('../models/User');
 
 // Create or update
 exports.modify = (request) => {
@@ -15,6 +13,11 @@ exports.modify = (request) => {
             access_token: process.env.ACCESS_TOKEN
         }
     }).then((response) => {
+
+        // Logger
+        console.info('USER: Information successfully retrieved');
+
+        // Create record
         User.findOneAndUpdate({
             id      : request.sender.id,
             name    : response.first_name,

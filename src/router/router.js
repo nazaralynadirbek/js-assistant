@@ -1,5 +1,5 @@
-const User = require('../controllers/User');
-const Query = require('../controllers/Query');
+const User   = require('../storage/controllers/User');
+const Aurora = require('../modules/Aurora/Aurora');
 
 module.exports = (app) => {
 
@@ -18,13 +18,15 @@ module.exports = (app) => {
 
                 // If payload
                 // Get user information and create new User
-                if (message.postback.payload === 'GET_STARTED_PAYLOAD') {
+                if (message.postback != undefined &&
+                    message.postback.payload === 'GET_STARTED_PAYLOAD') {
+
                     User.modify(message);
                 }
 
-                // Save into database
+                // Send into Bot
                 if (message.message != undefined) {
-                    Query.create(message);
+                    Aurora.run(message.message);
                 }
             })
 
@@ -43,7 +45,6 @@ module.exports = (app) => {
         }
     })
 
-    // GET
     app.get('/webhook', (request, response) => {
         let mode      = request.query['hub.mode'];
         let token     = request.query['hub.verify_token'];
