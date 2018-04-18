@@ -2,7 +2,7 @@ const axios = require('axios');
 const User  = require('../models/User');
 
 // Create or update
-exports.modify = (request) => {
+exports.modify = (response) => {
     User.findOneAndUpdate({
         id      : response.data.id,
         name    : response.data.first_name,

@@ -6,6 +6,9 @@ const Messenger = require('./components/Messenger');
 
 const run = (message) => {
 
+    // Status: Readed
+    Messenger.sendStatus('mark_seen', message.sender);
+
     // If payload
     // Get user information and create new User
     if (message.postback != undefined &&
@@ -19,8 +22,14 @@ const run = (message) => {
     // If message
     // Send to Natural
     if (message.message != undefined) {
+
+        // Status: Typing
+        Messenger.sendStatus('typing_on', message.sender);
+
         Natural.run().then(() => {
-            //
+
+            // Status: Typed
+            Messenger.sendStatus('typing_off', message.sender);
         }).catch((error) => {
             //
         })
