@@ -44,7 +44,10 @@ const sendStatus = (status, recipient) => {
 // Send Message
 const sendMessage = (message, recipient) => {
     return new Promise((resolve, reject) => {
-        axios.post(process.env.GRAPH_API + 'me/messages?access_token=' + process.env.ACCESS_TOKEN, message).then((response) => {
+        axios.post(process.env.GRAPH_API + 'me/messages?access_token=' + process.env.ACCESS_TOKEN, {
+            message   : message.text,
+            recipient : recipient,
+        }).then((response) => {
             resolve();
         }).catch((error) => {
             console.warn('MESSENGER: sendMessage method failed with status %s', error.response.status);
