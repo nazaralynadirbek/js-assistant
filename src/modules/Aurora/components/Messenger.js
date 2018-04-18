@@ -34,13 +34,13 @@ const sendStatus = (status, recipient) => {
                 sender_action : status,
                 access_token  : process.env.ACCESS_TOKEN
             }
-        })
-    }).then((response) => {
-        resolve();
-    }).catch((error) => {
-        console.error('MESSENGER: sendStatus method failed with status %s', error.response.status);
+        }).then((response) => {
+            resolve();
+        }).catch((error) => {
+            console.error('MESSENGER: sendStatus method failed with status %s', error.response.status);
 
-        reject(error);
+            reject(error);
+        })
     })
 }
 
