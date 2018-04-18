@@ -18,14 +18,14 @@ const getInformation = (sender) => {
 
             resolve(response);
         }).catch((error) => {
-            console.error('MESSENGER: getInformation method failed with status %s', error.response.status);
+            console.warn('MESSENGER: getInformation method failed with status %s', error.response.status);
 
             reject(error);
         })
     })
 }
 
-// Send Status of Sender
+// Send Status
 const sendStatus = (status, recipient) => {
     return new Promise((resolve, reject) => {
         axios.post(process.env.GRAPH_API + 'me/messages?access_token=' + process.env.ACCESS_TOKEN, {
@@ -34,14 +34,28 @@ const sendStatus = (status, recipient) => {
         }).then((response) => {
             resolve();
         }).catch((error) => {
-            console.error('MESSENGER: sendStatus method failed with status %s', error.response.status);
+            console.warn('MESSENGER: sendStatus method failed with status %s', error.response.status);
 
             reject(error);
         })
     })
 }
 
+// Send Message
+const sendMessage = (message, recipient) => {
+    return new Promise((resolve, reject) => {
+        axios.post(process.env.GRAPH_API + 'me/messages?access_token=' + process.env.ACCESS_TOKEN, message).then((response) => {
+            resolve();
+        }).catch((error) => {
+            console.warn('MESSENGER: sendMessage method failed with status %s', error.response.status);
+
+            reject();
+        })
+    })
+}
+
 module.exports = {
     sendStatus,
+    sendMessage,
     getInformation
 }

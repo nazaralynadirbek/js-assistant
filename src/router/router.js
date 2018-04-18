@@ -26,7 +26,7 @@ module.exports = (app) => {
             // Responds with '200 OK'
             response.sendStatus(200)
         } else {
-            console.warn('POST: 404 Not Found')
+            console.error('POST: 404 Not Found')
 
             // Responds with '404 Not Found'
             response.sendStatus(404)
