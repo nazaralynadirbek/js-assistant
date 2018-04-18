@@ -4,7 +4,7 @@ const axios = require('axios');
 const getInformation = (sender) => {
     return new Promise((resolve, reject) => {
         axios.get(process.env.GRAPH_API + sender.id, {
-            params: [
+            params: {
                 fields: [
                     'id',
                     'first_name',
@@ -12,7 +12,7 @@ const getInformation = (sender) => {
                     'gender'
                 ].join(','),
                 access_token: process.env.ACCESS_TOKEN
-            ]
+            }
         }).then((response) => {
             console.info('MESSENGER: getInformation method successfully ended');
 
