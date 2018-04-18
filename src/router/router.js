@@ -1,4 +1,3 @@
-const User   = require('../storage/controllers/User');
 const Aurora = require('../modules/Aurora/Aurora');
 
 module.exports = (app) => {
@@ -16,28 +15,17 @@ module.exports = (app) => {
                 // entry.messaging is array with only one object
                 let message = entry.messaging[0];
 
-                // If payload
-                // Get user information and create new User
-                if (message.postback != undefined &&
-                    message.postback.payload === 'GET_STARTED_PAYLOAD') {
-
-                    User.modify(message);
-                }
-
-                // Send into Bot
-                if (message.message != undefined) {
+                // Send message to Aurora
+                if (message != undefined) {
                     Aurora.run(message);
                 }
             })
 
-            // Logger
             console.info('POST: 200 OK')
 
             // Responds with '200 OK'
             response.sendStatus(200)
         } else {
-
-            // Logger
             console.warn('POST: 404 Not Found')
 
             // Responds with '404 Not Found'
@@ -45,6 +33,7 @@ module.exports = (app) => {
         }
     })
 
+    // GET
     app.get('/webhook', (request, response) => {
         let mode      = request.query['hub.mode'];
         let token     = request.query['hub.verify_token'];
@@ -52,15 +41,11 @@ module.exports = (app) => {
 
         if (mode && token) {
             if (mode === 'subscribe' && token == process.env.VERIFY_TOKEN) {
-
-                // Logging
                 console.info('GET: Webhook verification successful');
 
                 // Responds with the challenge token from the request
                 response.status(200).send(challenge);
             } else {
-
-                // Logging
                 console.error('GET: Webhook verification failed');
 
                 // Responds with '403 Forbidden'
