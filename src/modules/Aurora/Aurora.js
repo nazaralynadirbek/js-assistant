@@ -1,8 +1,8 @@
-const User    = require('../storage/controllers/User');
+const User    = require('../../storage/controllers/User');
 const Natural = require('../Natural/Natural');
 
 // Components
-const Messanger = require('./components/Messanger');
+const Messenger = require('./components/Messenger');
 
 const run = (message) => {
 
@@ -11,7 +11,7 @@ const run = (message) => {
     if (message.postback != undefined &&
         message.postback.payload === 'GET_STARTED_PAYLOAD') {
 
-        Messanger.getInformation(message.sender).then((response) => {
+        Messenger.getInformation(message.sender).then((response) => {
             User.modify(response);
         });
     }

@@ -14,11 +14,11 @@ const getInformation = (sender) => {
                 access_token: process.env.ACCESS_TOKEN
             ]
         }).then((response) => {
-            console.info('MESSANGER: getInformation method successfully ended');
+            console.info('MESSENGER: getInformation method successfully ended');
 
             resolve(response);
         }).catch((error) => {
-            console.error('MESSANGER: getInformation method failed with status %s', error.response.status);
+            console.error('MESSENGER: getInformation method failed with status %s', error.response.status);
 
             reject(error);
         })
@@ -26,5 +26,5 @@ const getInformation = (sender) => {
 }
 
 module.exports = {
-
+    getInformation
 }
