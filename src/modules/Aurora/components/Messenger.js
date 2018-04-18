@@ -45,7 +45,7 @@ const sendStatus = (status, recipient) => {
 const sendMessage = (message, recipient) => {
     return new Promise((resolve, reject) => {
         axios.post(process.env.GRAPH_API + 'me/messages?access_token=' + process.env.ACCESS_TOKEN, {
-            message   : message.text,
+            message   : message,
             recipient : recipient,
         }).then((response) => {
             resolve();
