@@ -45,5 +45,6 @@ const sendStatus = (status, recipient) => {
 }
 
 module.exports = {
+    sendStatus,
     getInformation
 }
