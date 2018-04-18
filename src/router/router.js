@@ -26,7 +26,7 @@ module.exports = (app) => {
 
                 // Send into Bot
                 if (message.message != undefined) {
-                    Aurora.run(message.message);
+                    Aurora.run(message);
                 }
             })
 

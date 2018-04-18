@@ -20,9 +20,9 @@ exports.modify = (request) => {
         // Create record
         User.findOneAndUpdate({
             id      : request.sender.id,
-            name    : response.first_name,
-            surname : response.last_name,
-            gender  : response.gender
+            name    : response.data.first_name,
+            surname : response.data.last_name,
+            gender  : response.data.gender
         }, {
             expire: new Date()
         }, {
