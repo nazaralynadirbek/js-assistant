@@ -1,8 +1,8 @@
 // Natural Language Processing Layer
 
-const run = () => {
+const run = (message) => {
     return new Promise((resolve, reject) => {
-
+        reject()
     })
 }
 

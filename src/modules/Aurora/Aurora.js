@@ -1,6 +1,9 @@
 const User    = require('../../storage/controllers/User');
 const Natural = require('../Natural/Natural');
 
+// External data
+const Railways  = require('./external/Railways');
+
 // Components
 const Messenger = require('./components/Messenger');
 
@@ -22,16 +25,24 @@ const run = (message) => {
     // If message
     // Send to Natural
     if (message.message != undefined) {
-
-        // Status: Typing
         Messenger.sendStatus('typing_on', message.sender);
 
-        Natural.run().then(() => {
+        Natural.run(message.message).then(() => {
 
-            // Status: Typed
+            // If Natural create response
+            // Retrieve data from external API using this response
+
             Messenger.sendStatus('typing_off', message.sender);
         }).catch((error) => {
-            //
+            Messenger.sendStatus('typing_off', message.sender);
+
+            // if Natural can't create response
+            // Send message 'Sorry, I can't understand you'
+            Messenger.sendMessage({
+                message: {
+                    text: 'Sorry, I can\'t understand you!'
+                }
+            }, message.sender)
         })
     }
 }
