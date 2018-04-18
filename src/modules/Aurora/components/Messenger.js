@@ -28,11 +28,10 @@ const getInformation = (sender) => {
 // Send Status of Sender
 const sendStatus = (status, recipient) => {
     return new Promise((resolve, reject) => {
-        axios.post(process.env.GRAPH_API + 'me/messages', {
-            params: {
+        axios.post(process.env.GRAPH_API + 'me/messages?access_token=' + process.env.ACCESS_TOKEN, {
+            data: {
                 recipient     : recipient,
                 sender_action : status,
-                access_token  : process.env.ACCESS_TOKEN
             }
         }).then((response) => {
             resolve();
