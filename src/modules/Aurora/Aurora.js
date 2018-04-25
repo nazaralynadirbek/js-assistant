@@ -25,22 +25,30 @@ const run = (message) => {
     // If message
     // Send to Natural
     if (message.message != undefined) {
-        Messenger.sendStatus('typing_on', message.sender);
+        Messenger.sendStatus('typing_on', message.sender).then(() => {
+            Natural.run(message.message).then((response) => {
 
-        Natural.run(message.message).then(() => {
+                // Retrieve data from external database
+                Railways.getTrains({
+                    body: {
 
-            // If Natural create response
-            // Retrieve data from external API using this response
+                    }
+                }).then((response) => {
+                    Messenger.sendStatus('typing_off', message.sender);
+                }).catch((error) => {
+                    Messenger.sendMessage({
+                        text: 'Sorry, an error occurred during this request. Please, try later!'
+                    }, message.sender)
+                })
+            }).catch((error) => {
+                Messenger.sendStatus('typing_off', message.sender);
 
-            Messenger.sendStatus('typing_off', message.sender);
-        }).catch((error) => {
-            Messenger.sendStatus('typing_off', message.sender);
-
-            // if Natural can't create response
-            // Send message 'Sorry, I can't understand you'
-            Messenger.sendMessage({
-                text: 'Sorry, I can\'t understand you!'
-            }, message.sender)
+                // if Natural can't create response
+                // Send message 'Sorry, I can't understand you'
+                Messenger.sendMessage({
+                    text: 'Sorry, I can\'t understand you!'
+                }, message.sender)
+            })
         })
     }
 }

@@ -2,7 +2,7 @@
 
 const run = (message) => {
     return new Promise((resolve, reject) => {
-        reject()
+        resolve()
     })
 }
 
