@@ -27,25 +27,13 @@ const run = (message) => {
     if (message.message != undefined) {
         Messenger.sendStatus('typing_on', message.sender).then(() => {
             Natural.run(message.message).then((response) => {
-
-                // Retrieve data from external database
-                Railways.getTrains({
-                    body: {
-
-                    }
-                }).then((response) => {
-                    Messenger.sendStatus('typing_off', message.sender);
-                }).catch((error) => {
-                    Messenger.sendMessage({
-                        text: 'Sorry, an error occurred during this request. Please, try later!'
-                    }, message.sender)
-                })
+                //
             }).catch((error) => {
                 Messenger.sendStatus('typing_off', message.sender);
 
                 // if Natural can't create response
                 // Send message 'Sorry, I can't understand you'
-                Messenger.sendMessage({
+                Messenger.sendTemplate({
                     text: 'Sorry, I can\'t understand you!'
                 }, message.sender)
             })
