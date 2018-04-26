@@ -12,20 +12,19 @@ const getTrains = (config) => {
     })
 }
 
-const getTrain = () => {
-    return new Promise((resolve, reject) => {
-
-    })
-}
-
 const getStations = () => {
     return new Promise((resolve, reject) => {
-
+        axios.post(process.env.RAILWAYS_API + 'search_stations', config.body, {
+            params: config.params
+        }).then((response) => {
+            resolve(response)
+        }).catch((error) => {
+            reject(error)
+        })
     })
 }
 
 module.exports = {
-    getTrain,
     getTrains,
     getStations
 }

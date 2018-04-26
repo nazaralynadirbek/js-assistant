@@ -33,7 +33,7 @@ const run = (message) => {
 
                 // if Natural can't create response
                 // Send message 'Sorry, I can't understand you'
-                Messenger.sendTemplate({
+                Messenger.sendMessage({
                     text: 'Sorry, I can\'t understand you!'
                 }, message.sender)
             })

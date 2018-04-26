@@ -57,27 +57,6 @@ const sendMessage = (message, recipient) => {
     })
 }
 
-// Send Message Via Template
-const sendTemplate = (message, recipient, template) => {
-    return new Promise((resolve, reject) => {
-        axios.post(process.env.GRAPH_API + 'me/messages/?access_token' + process.env.ACCESS_TOKEN, {
-            recipient: recipient,
-            message: {
-                type: 'template',
-                payload: {
-                    template_type: 'button',
-                    text: 'Here are several options for this trip',,
-                    buttons: [{
-                        type: 'web_url',
-                        url: 'https://avia.beta.transavia.kz',
-                        title: 'transavia'
-                    }]
-                }
-            }
-        })
-    })
-}
-
 module.exports = {
     sendStatus,
     sendMessage,
