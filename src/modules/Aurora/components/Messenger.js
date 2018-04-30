@@ -33,8 +33,8 @@ const sendStatus = (status, recipient) => {
             sender_action : status,
         }).then((response) => {
             resolve();
-        }).catch((error) => {
             console.warn('MESSENGER: sendStatus method failed with status %s', error.response.status);
+        }).catch((error) => {
 
             reject(error);
         })
