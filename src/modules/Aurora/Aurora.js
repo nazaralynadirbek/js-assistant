@@ -28,7 +28,7 @@ const run = (message) => {
         Messenger.sendStatus('typing_on', message.sender).then(() => {
             Natural.run(message.message).then((response) => {
                 Messenger.sendMessage({
-                    text: 'URL Generated! Sending...'
+                    text: 'Sorry, Railways server is not available now. We will give you response as soon as it will be possible!'
                 }, message.sender)
             }).catch((error) => {
                 Messenger.sendStatus('typing_off', message.sender);
